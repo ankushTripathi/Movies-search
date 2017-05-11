@@ -8,8 +8,6 @@ app.controller('SearchList',function($scope,$http){
         var url;
         if($scope.movieSearched.title===undefined && $scope.movieSearched.year === undefined)
            $scope.errors = {"error": "Enter Movie Title or Year"}; 
-        else if($scope.movieSearched.title===undefined)
-            url = 'http://www.omdbapi.com/?y='+$scope.movieSearched.year;
         else
             url = 'http://www.omdbapi.com/?t='+$scope.movieSearched.title+'&y='+$scope.movieSearched.year;
 
