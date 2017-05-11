@@ -28,7 +28,7 @@
             <div class="row" ng-show="results.Title">
 			<div class="col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><h3>Movies Found</h3></div>
+					<div class="panel-heading"><h3>{{results.Title}}</h3></div>
 					<div class="panel-body"><table class="table table-striped">
 						<tr ng-repeat="(key,data) in results">
 							<td>{{key}}</td><td>{{ data }}</td>
@@ -38,7 +38,7 @@
 			</div>
 		</div>
         <div class="row" ng-show="erors">
-            
+            {{errors}}
         </div>
     
     </body>
