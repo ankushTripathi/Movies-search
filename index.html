@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	</head>
     <body ng-app="Movies">
-        <div class="container-fluid">
-            <div class="page-header" ng-controller="SearchList as list">
+        <div class="container-fluid" ng-controller="SearchList">
+            <div class="page-header">
                 <h1>Search any Movie...</h1>
             </div>
             <div class="row">
@@ -21,15 +21,24 @@
                 <input type="text" placeholder="Title" class="form-control" ng-model="movieSearched.title">
                 <label> Year :</label>
                 <input type="text" placeholder="Year" class="form-control" ng-model="movieSearched.year">
-                <label> Plot :</label>
-                <select name="plot" class="form-control"  ng-model="movieSearched.plot">
-                    <option value selected>Short</option>
-                    <option value="full">Full</option>
-                </select>
-                <button class="btn btn-info" ng-click="list.searchMovie()">Search</button>
-                <button class="btn btn-default" ng-click="list.reset()">Reset</button>
+                <button class="btn btn-info" ng-click="searchMovie()">Search</button>
+                <button class="btn btn-default" ng-click="reset()">Reset</button>
                 </form>
             </div>
+            <div class="row" ng-show="results.Title">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading"><h3>Movies Found</h3></div>
+					<div class="panel-body"><table class="table table-striped">
+						<tr ng-repeat="(key,data) in results">
+							<td>{{key}}</td><td>{{ data }}</td>
+						</tr>
+					</table></div>
+				</div>
+			</div>
+		</div>
+        <div class="row" ng-show="erors">
+            
         </div>
     
     </body>
