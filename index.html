@@ -28,12 +28,17 @@
             <div class="row" ng-show="results.Title">
 			<div class="col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><h3>{{results.Title}}</h3>
+					<div class="panel-heading"><h2>{{results.Title}}</h2>
                      <img ng-src="{{results.Poster}}" class="img-rounded img-responsive">
+                     <div  ng-repeat="rating in results.Ratings">
+                         <p class="lead">{{rating.Source}} | {{rating.Value}}</p>
+                     </div>
                     </div>
 					<div class="panel-body"><table class="table table-striped">
 						<tr ng-repeat="(key,data) in results">
+                            <span ng-hide="{key === 'Ratings'}">
 							<td>{{key}}</td><td>{{ data }}</td>
+                            </span>
 						</tr>
 					</table></div>
 				</div>
