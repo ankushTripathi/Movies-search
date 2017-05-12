@@ -8,6 +8,7 @@
 		<script src="js/app.js"></script>
 		<script src="js/controller/MoviesController.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
 	</head>
     <body ng-app="Movies">
         <div class="container-fluid" ng-controller="SearchList">
@@ -15,34 +16,38 @@
                 <h1>Search any Movie...</h1>
             </div>
             <div class="row">
-                <form class="form-inline well well-sm clearfix">
-                <span class="glyphicon glyphicon-search"></span>
-                <label> Title :</label>
-                <input type="text" placeholder="Title" class="form-control" ng-model="movieSearched.title">
-                <label> Year :</label>
-                <input type="text" placeholder="Year" class="form-control" ng-model="movieSearched.year">
-                <button class="btn btn-info" ng-click="searchMovie()">Search</button>
-                <button class="btn btn-default" ng-click="reset()">Reset</button>
+                <form class="form-inline well well-sm clearfix"> 
+                    <label for="title"> Title :</label>
+                    <input type="text" id="title" placeholder="Title" class="form-control" ng-model="movieSearched.title">
+                    <label for="year"> Year :</label>
+                    <input type="text" id="year" placeholder="Year" class="form-control" ng-model="movieSearched.year">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <div class="btn-group col-md-offset-2" role="group" aria-label="...">
+                        <button class="btn btn-primary" ng-click="searchMovie()">Search</button>
+                        <button class="btn btn-default" ng-click="reset()">Reset</button>
+                    </div>       
                 </form>
             </div>
-            <div class="row" ng-show="results.Title">
-			<div class="col-md-3">
+            <div class="loader center-block" ng-show="showLoader"></div>
+            <div class="row center-block" ng-show="results.Title">
+			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-heading"><h2>{{results.Title}}</h2>
                      <img ng-src="{{results.Poster}}" class="img-rounded img-responsive">
                      <div  ng-repeat="rating in results.Ratings">
-                         <p class="lead">{{rating.Source}} | {{rating.Value}}</p>
+                         <p class="lead">{{rating.Source}} : {{rating.Value}}</p>
                      </div>
                     </div>
+				</div>
+			</div>
 					<div class="panel-body"><table class="table table-striped">
 						<tr ng-repeat="(key,data) in results">
-                            <span ng-hide="{key === 'Ratings'}">
+                            <span ng-hide="{key : 'Ratings'}">
 							<td>{{key}}</td><td>{{ data }}</td>
                             </span>
 						</tr>
 					</table></div>
 				</div>
-			</div>
 		</div>
         <div class="row" ng-show="erors">
             {{errors}}
