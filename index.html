@@ -44,7 +44,7 @@
                 </div>
             </div>
             </div>
-            <div class="container" ng-show="results.Title">
+            <div class="container" ng-show="hasData">
                 <div class="loader center-block" ng-show="showLoader"></div>
                 <div class="row" >
                     <div class="col-md-6">
@@ -78,7 +78,7 @@
                                         <th>Movie</th>
                                         <th>Details</th>
                                     </tr>
-                                    <tr ng-repeat="(key,data) in results">
+                                    <tr ng-repeat="(key,data) in movieData()">
                                         <td>{{key}}</td><td>{{ data }}</td>
                                         </span>
                                     </tr>
