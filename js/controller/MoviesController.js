@@ -5,15 +5,14 @@ app.controller('SearchList',function($scope,$http){
     $scope.results = {};
     $scope.errors = "";
     $scope.hasError = false;
+    $scope.keys = [];
     $scope.searchMovie = function(){
-        var url;
-            url = 'http://www.omdbapi.com/?t='+$scope.movieSearched.title+'&y='+$scope.movieSearched.year;
+        var url = 'http://www.omdbapi.com/?t='+$scope.movieSearched.title+'&y='+$scope.movieSearched.year;
             $scope.showLoader = true;
             $http.get(url)
                         .success(function(data,status,headers,config){
                             $scope.showLoader = false;
                              $scope.hasError = false;
-                                console.log(data);
                                 if(data.Response === "False")
                                    { 
                                        $scope.hasError = true;

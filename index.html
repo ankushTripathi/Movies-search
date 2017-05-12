@@ -17,35 +17,37 @@
             </div>
             <div class="row">
                 <form class="form-inline well well-sm boxed clearfix"> 
+                    <div class="col-md-8">
                     <label for="title"> Title :</label>
-                    <input type="text" id="title" placeholder="Title" class="form-control" ng-model="movieSearched.title">
-                    <label for="year"> Year :</label>
-                    <input type="text" id="year" placeholder="Year" class="form-control" ng-model="movieSearched.year">
-                    <span class="glyphicon glyphicon-search"></span>
-                    <div class="btn-group col-md-offset-2" role="group" aria-label="...">
-                        <button class="btn btn-primary" ng-click="searchMovie()">Search</button>
+                    <input type="search" id="title" placeholder="Title" class="form-control" ng-model="movieSearched.title">
+                    </div>
+                    <div class="btn-group col-md-4" role="group" aria-label="...">
+                        <button class="btn btn-primary" ng-click="searchMovie()">
+                            <span class="glyphicon glyphicon-search"></span>
+                            Search
+                            </button>
                         <button class="btn btn-default" ng-click="reset()">Reset</button>
                     </div>       
                 </form>
             </div>
             <div class="loader center-block" ng-show="showLoader"></div>
             <div class="row" >
-			<div class="col-md-6 boxed" ng-show="results.Title">
-                <div class="alert alert-success fade in">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <strong>Success!</strong>  Movie found..
-                </div>
-				<div class="panel panel-default">
+			<div class="row" ng-show="results.Title">
+				<div  class="col-md-6 boxed panel panel-default">
 					<div class="panel-heading"><h2>{{results.Title}}</h2></div>
                     <div class="panel-body">
-                     <img ng-src="{{results.Poster}}" class="img-rounded">
-                     <p class="lead pull-right">{{results.Plot}}</p>
+                        <div class="col-md-6 pull-left">
+                     <img ng-src="{{results.Poster}}" class="img-rounded img-responsive" alt="Poster">
+                        </div>
+                        <div class="col-md-6">
+                     <p class="lead">{{results.Plot}}</p>
                      <div  ng-repeat="rating in results.Ratings">
                          <h3 class="text-info">{{rating.Source}} : {{rating.Value}}</h3>
                      </div>
+                        </div>
                     </div>
 				</div>
-                <div>
+                <div class="col-md-6">
 					<table class="table table-striped table-bordered">
                         <thead>
                             <td>Key</td>
@@ -53,14 +55,14 @@
                         </thead>
                         <tbody>
 						<tr ng-repeat="(key,data) in results">
-                            <span ng-hide="{key : 'Ratings'}">
+                            <span>
 							<td>{{key}}</td><td>{{ data }}</td>
                             </span>
 						</tr>
                         </tbody>
 					</table>
                     </div>
-				</div>
+            </div>
         <div class="row" ng-show="hasError">
             <div class="alert alert-danger fade in">
                 <button type="button" class="close" ng-click="reset()" data-dismiss="alert" aria-hidden="true">&times;</button>
