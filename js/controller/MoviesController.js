@@ -17,6 +17,8 @@ app.controller('SearchList',function($scope,$http){
                                    { 
                                        $scope.hasError = true;
                                        $scope.errors = data.Error;
+                                           $scope.movieSearched = {};
+                                            $scope.results=  {};
                                     }
                                 else
                                  $scope.results = data;
