@@ -11,12 +11,12 @@
         <link rel="stylesheet" href="css/style.css">
 	</head>
     <body ng-app="Movies">
-        <div class="container-fluid" ng-controller="SearchList">
+        <div class="container" ng-controller="SearchList">
             <div class="page-header">
                 <h1>Search any Movie...</h1>
             </div>
             <div class="row">
-                <form class="form-inline well well-sm clearfix"> 
+                <form class="form-inline well well-sm boxed clearfix"> 
                     <label for="title"> Title :</label>
                     <input type="text" id="title" placeholder="Title" class="form-control" ng-model="movieSearched.title">
                     <label for="year"> Year :</label>
@@ -29,29 +29,45 @@
                 </form>
             </div>
             <div class="loader center-block" ng-show="showLoader"></div>
-            <div class="row center-block" ng-show="results.Title">
-			<div class="col-md-6">
+            <div class="row" >
+			<div class="col-md-6 boxed" ng-show="results.Title">
+                <div class="alert alert-success fade in">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Success!</strong>  Movie found..
+                </div>
 				<div class="panel panel-default">
-					<div class="panel-heading"><h2>{{results.Title}}</h2>
-                     <img ng-src="{{results.Poster}}" class="img-rounded img-responsive">
+					<div class="panel-heading"><h2>{{results.Title}}</h2></div>
+                    <div class="panel-body">
+                     <img ng-src="{{results.Poster}}" class="img-rounded">
+                     <p class="lead pull-right">{{results.Plot}}</p>
                      <div  ng-repeat="rating in results.Ratings">
-                         <p class="lead">{{rating.Source}} : {{rating.Value}}</p>
+                         <h3 class="text-info">{{rating.Source}} : {{rating.Value}}</h3>
                      </div>
                     </div>
 				</div>
-			</div>
-					<div class="panel-body"><table class="table table-striped">
+                <div>
+					<table class="table table-striped table-bordered">
+                        <thead>
+                            <td>Key</td>
+                            <td>Data</td>
+                        </thead>
+                        <tbody>
 						<tr ng-repeat="(key,data) in results">
                             <span ng-hide="{key : 'Ratings'}">
 							<td>{{key}}</td><td>{{ data }}</td>
                             </span>
 						</tr>
-					</table></div>
+                        </tbody>
+					</table>
+                    </div>
 				</div>
-		</div>
-        <div class="row" ng-show="erors">
-            {{errors}}
+        <div class="row" ng-show="hasError">
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" ng-click="reset()" data-dismiss="alert" aria-hidden="true">&times;</button>
+                 <strong>{{errors}}</strong>
+            </div>
         </div>
-    
+    </div>
+        </div>
     </body>
 </html>

@@ -3,7 +3,8 @@ app.controller('SearchList',function($scope,$http){
     $scope.movieSearched = {};
     $scope.showLoader = false;
     $scope.results = {};
-    $scope.errors = {};
+    $scope.errors = "";
+    $scope.hasError = false;
     $scope.searchMovie = function(){
         var url;
             url = 'http://www.omdbapi.com/?t='+$scope.movieSearched.title+'&y='+$scope.movieSearched.year;
@@ -11,13 +12,15 @@ app.controller('SearchList',function($scope,$http){
             $http.get(url)
                         .success(function(data,status,headers,config){
                             $scope.showLoader = false;
-                            if(status === 200)
-                             $scope.results = data;
-                             else
-                                { 
-                                    console.log(data);
-                                    $scope.errors = data;
-                                }
+                             $scope.hasError = false;
+                                console.log(data);
+                                if(data.Response === "False")
+                                   { 
+                                       $scope.hasError = true;
+                                       $scope.errors = data.Error;
+                                    }
+                                else
+                                 $scope.results = data;
 
                         })
                           .error(function(error){
@@ -26,8 +29,10 @@ app.controller('SearchList',function($scope,$http){
     }
 
     $scope.reset = function(){
+         $scope.hasError = false;
         $scope.movieSearched = {};
         $scope.results=  {};
+        $scope.errors = {};
 
     }
 
