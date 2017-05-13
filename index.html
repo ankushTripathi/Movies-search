@@ -36,9 +36,9 @@
                     </div>
                 </div>
             </nav>
-                <div class="row text-center well well-sm-4" ng-show="movieSearched.title">
+                <div class="row text-center bg-green-transparent well well-sm-4" ng-show="movieSearched.title">
                 <ul>
-                  <span>Movies with title containing '{{movieSearched.title}}'</span>
+                  <strong><span>Movies with title containing '{{movieSearched.title}}'</span>
                   <button type="button" class="close" ng-click="removeSuggestion()" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <br>
                   <li ng-repeat="movie in autoResults.Search">
@@ -46,6 +46,7 @@
                     </a>, {{ movie.Year }}
                   </li>
                 </ul>
+            </strong>
           </div>
             <div class="container">
             <div class="row" ng-show="hasError">

@@ -13,6 +13,11 @@ body{
     background: url('../img/home.jpg') no-repeat center fixed; 
 }
 
+.bg-green-transparent{
+  opacity: 0.9;
+  background-color: #71d43c;
+}
+
 .col-md-6{
     padding-top: 30px;
 }
