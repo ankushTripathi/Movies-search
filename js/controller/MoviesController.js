@@ -6,6 +6,7 @@ app.controller('SearchList',function($scope,$http){
     $scope.errors = "";
     $scope.hasError = false;
     $scope.hasData = false;
+    $scope.autoResults = {};
     $scope.movieData = function(){
         var filtered = JSON.parse(JSON.stringify($scope.results));;
         var keys = Object.keys(filtered);
@@ -17,14 +18,42 @@ app.controller('SearchList',function($scope,$http){
          }
         return filtered;
     }
-    $scope.searchMovie = function(){
-        var url = 'http://www.omdbapi.com/?t='+$scope.movieSearched.title+'&y='+$scope.movieSearched.year;
+
+    var searchNew;
+    $scope.searchNewMovies = function(){
+      
+      searchNew = setTimeout(fetch, 1000);
+    };
+
+    function fetch() {
+      $http.get("https://www.omdbapi.com/?s=" + $scope.movieSearched.title + "&type=movie")
+       .success(function(response){  $scope.autoResults = response; 
+    });
+    }
+
+    $scope.searchMovie = function(movie){
+        
+        var url;
+        var title;
+        var year;
+        if(movie === undefined){
+            title = $scope.movieSearched.title;
+            year = $scope.movieSearched.year;
+        }
+        else
+        {
+            title =  movie.Title;
+            year= movie.Year;
+        }
+         url = 'http://www.omdbapi.com/?t='+title+'&y='+year;
             $scope.showLoader = true;
             $http.get(url)
                         .success(function(data,status,headers,config){
                             $scope.showLoader = false;
                              $scope.hasError = false;
                              $scope.hasData = true;
+                                $scope.movieSearched.title = title;
+                                $scope.movieSearched.year = year;
                                 if(data.Response === "False")
                                    { 
                                        $scope.hasError = true;
@@ -49,6 +78,10 @@ app.controller('SearchList',function($scope,$http){
         $scope.results=  {};
         $scope.errors = {};
 
+    }
+
+    $scope.removeSuggestion = function(){
+          $scope.autoResults = {};
     }
 
 });

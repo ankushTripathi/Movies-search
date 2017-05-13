@@ -23,7 +23,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right">
                         <div class="form-group">
-                        <input type="search" placeholder="Title" class="form-control" ng-model="movieSearched.title">
+                        <input type="search" placeholder="Title" class="form-control" ng-model="movieSearched.title" ng-change="searchNewMovies()">
                         </div>
                         <div class="form-group">
                         <input type="text" placeholder="Year" class="form-control" ng-model="movieSearched.year">
@@ -36,6 +36,17 @@
                     </div>
                 </div>
             </nav>
+                <div class="row text-center well well-sm-4" ng-show="movieSearched.title">
+                <ul>
+                  <span>Movies with title containing '{{movieSearched.title}}'</span>
+                  <button type="button" class="close" ng-click="removeSuggestion()" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <br>
+                  <li ng-repeat="movie in autoResults.Search">
+                    <a href="#" id="{{ $index + 1 }}" ng-click="searchMovie(movie)">{{ movie.Title }}
+                    </a>, {{ movie.Year }}
+                  </li>
+                </ul>
+          </div>
             <div class="container">
             <div class="row" ng-show="hasError">
                 <div class="alert alert-danger fade in">
