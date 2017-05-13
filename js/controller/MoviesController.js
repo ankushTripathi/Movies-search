@@ -13,7 +13,7 @@ app.controller('SearchList',function($scope,$http){
          for(var i=0;i<keys.length;i++){
               if(filtered[keys[i]] === "N/A")
                  delete filtered[keys[i]];
-             if(keys[i] == 'Ratings' || keys[i] === 'Plot' || keys[i] === 'Poster')
+             if(keys[i] == 'Ratings' || keys[i] === 'Plot' || keys[i] === 'Poster' || keys[i] === 'Response')
                  delete filtered[keys[i]];
          }
         return filtered;
@@ -26,7 +26,7 @@ app.controller('SearchList',function($scope,$http){
     };
 
     function fetch() {
-      $http.get("https://www.omdbapi.com/?s=" + $scope.movieSearched.title + "&type=movie")
+      $http.get("https://www.omdbapi.com/?s=" + $scope.movieSearched.title + "&type=movie&y="+ $scope.movieSearched.year)
        .success(function(response){  $scope.autoResults = response; 
     });
     }

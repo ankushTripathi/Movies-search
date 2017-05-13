@@ -26,7 +26,7 @@
                         <input type="search" placeholder="Title" class="form-control" ng-model="movieSearched.title" ng-change="searchNewMovies()">
                         </div>
                         <div class="form-group">
-                        <input type="text" placeholder="Year" class="form-control" ng-model="movieSearched.year">
+                        <input type="text" placeholder="Year" class="form-control" ng-change="searchNewMovies()" ng-model="movieSearched.year">
                         </div>
                         <button type="submit" class="btn btn-success  waves-effect" ng-click="searchMovie()">
                             <span class="glyphicon glyphicon-search"></span>
@@ -38,7 +38,7 @@
             </nav>
                 <div class="row text-center bg-green-transparent well well-sm-4" ng-show="movieSearched.title">
                 <ul>
-                  <strong><span>Movies with title containing '{{movieSearched.title}}'</span>
+                  <strong><span>Movies with title containing '{{movieSearched.title}}' <span ng-if="movieSearched.year">and released in year '{{movieSearched.year}}'</span></span>
                   <button type="button" class="close" ng-click="removeSuggestion()" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <br>
                   <li ng-repeat="movie in autoResults.Search">
@@ -72,7 +72,10 @@
                         </div>
                         <div class="card-content">
                             <h5>{{results.Title}}</h5>
-                            <p class="lead">{{results.Plot}}</p>
+                            <p class="lead">
+                                <h3>Plot</h3><br>
+                                {{results.Plot}}
+                            </p>
                             <div  ng-repeat="rating in results.Ratings">
                                  <h3 class="text-info">{{rating.Source}} : {{rating.Value}}</h3>
                             </div>
