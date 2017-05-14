@@ -37,6 +37,15 @@ app.controller('SearchList',function($scope,$http){
         var title;
         var year;
         if(movie === undefined){
+            if($scope.movieSearched.title === undefined){
+                    $scope.hasError = true;
+                    $scope.hasData = false;
+                    $scope.errors = "Please Enter a Movie";
+                    $scope.movieSearched = {};
+                    $scope.results=  {};
+                    return ;
+            }
+
             title = $scope.movieSearched.title;
             year = $scope.movieSearched.year;
         }
